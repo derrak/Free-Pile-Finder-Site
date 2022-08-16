@@ -6,6 +6,7 @@ namespace FreePileFinder.Models
 {
   public class Pile
   {
+
     public int PileId { get; set; }
 
     public int UserId { get; set; }
@@ -28,16 +29,45 @@ namespace FreePileFinder.Models
 
     public string Zipcode { get; set; }
 
-    // public static List<Pile> GetPiles(string apiKey)
-    public static List<Pile> GetPiles(string apiKey)
+    public static List<Pile> GetPiles()
     {
-      var apiCallTask = ApiHelper.ApiCall(apiKey);
+      var apiCallTask = ApiHelper.GetAll();
+      var result = apiCallTask.Result;
+
+      JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
+      List<Pile> pileList = JsonConvert.DeserializeObject<List<Pile>>(jsonResponse.ToString());
+
+      // JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      // List<Pile> pileList = JsonConvert.DeserializeObject<List<Pile>>(jsonResponse.ToString());
+
+      return pileList;
+    }
+    public static Pile GetDetails(int id)
+    {
+      var apiCallTask = ApiHelper.Get(id);
       var result = apiCallTask.Result;
 
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-      List<Pile> pileList = JsonConvert.DeserializeObject<List<Pile>>(jsonResponse["results"].ToString());
+      Pile pile = JsonConvert.DeserializeObject<Pile>(jsonResponse.ToString());
 
-      return pileList;
+      return pile;
+    }
+
+    public static void Post(Pile pile)
+    {
+      string jsonPile = JsonConvert.SerializeObject(pile);
+      var apiCallTask = ApiHelper.Post(jsonPile);
+    }
+
+    public static void Put(Pile pile)
+    {
+      string jsonPile = JsonConvert.SerializeObject(pile);
+      var apiCallTask = ApiHelper.Put(pile.PileId, jsonPile);
+    }
+
+    public static void Delete(int id)
+    {
+      var apiCallTask = ApiHelper.Delete(id);
     }
   }
 }
