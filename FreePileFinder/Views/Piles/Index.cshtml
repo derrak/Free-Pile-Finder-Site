@@ -1,0 +1,24 @@
+@using FreePileFinder.Models;
+@model List<FreePileFinder.Models.Pile>;
+  
+<h1>All Piles:</h1>
+
+<ol>
+@foreach (Pile pile in Model)
+{
+    <ul>
+        <hr> 
+        <li>Title: @pile.Title</li>
+        <li>Description: @pile.Description</li>
+        <li>State: @pile.State</li>
+        <li>City: @pile.City</li>
+        <li>Zipcode: @pile.Zipcode</li>
+        <li>Lattitude: @pile.Lat</li>
+        <li>Longitude: @pile.Lng</li>
+        <li>Post Date: @pile.CreatedDate</li>
+        <li>Pile ID: @pile.PileId</li>
+        <li>Availability: @pile.Availability</li>
+    </ul>
+    <a href="/Piles/Details/@(pile.PileId)"><p>View Details</p></a>
+}
+</ol>

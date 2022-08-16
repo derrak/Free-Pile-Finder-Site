@@ -1,0 +1,36 @@
+@* @using FreePileFinder.Models; *@
+@* @model List<FreePileFinder.Models.Pile>; *@
+  @model FreePileFinder.Models.Pile;
+
+@{
+  ViewData["Title"] = "Details";
+}
+
+<h1>Pile Info:</h1>
+
+
+<ul>
+  <li>Title: @Model.Title</li>
+  <li>Description: @Model.Description</li>
+  <li>State: @Model.State</li>
+  <li>City: @Model.City</li>
+  <li>Zipcode: @Model.Zipcode</li>
+  <li>Lattitude: @Model.Lat</li>
+  <li>Longitude: @Model.Lng</li>
+  <li>Post Date: @Model.CreatedDate</li>
+  <li>Pile ID: @Model.PileId</li>
+  <li>Availability: @Model.Availability</li>
+</ul>
+<br>
+
+<a href="/Piles/Edit/@(Model.PileId)">
+  <p>Edit</p>
+</a>
+
+<a href="/Piles">
+  <p>Return</p>
+</a>
+
+<a href="/Piles/Delete/@(Model.PileId)">
+  <p>Delete Pile</p>
+</a>
