@@ -1,36 +1,72 @@
 @* @using FreePileFinder.Models; *@
 @* @model List<FreePileFinder.Models.Pile>; *@
-  @model FreePileFinder.Models.Pile;
+@model FreePileFinder.Models.Pile;
 
 @{
   ViewData["Title"] = "Details";
 }
 
-<h1>Pile Info:</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <h1>Pile Info:</h1>
 
-
-<ul>
-  <li>Title: @Model.Title</li>
-  <li>Description: @Model.Description</li>
-  <li>State: @Model.State</li>
-  <li>City: @Model.City</li>
-  <li>Zipcode: @Model.Zipcode</li>
-  <li>Lattitude: @Model.Lat</li>
-  <li>Longitude: @Model.Lng</li>
-  <li>Post Date: @Model.CreatedDate</li>
-  <li>Pile ID: @Model.PileId</li>
-  <li>Availability: @Model.Availability</li>
-</ul>
-<br>
-
+      <ul>
+        <li>Title: @Model.Title</li>
+        <li>Description: @Model.Description</li>
+        <li>State: @Model.State</li>
+        <li>City: @Model.City</li>
+        <li>Zipcode: @Model.Zipcode</li>
+        <li>Lattitude: @Model.Lat</li>
+        <li>Longitude: @Model.Lng</li>
+        <li>Post Date: @Model.CreatedDate</li>
+        <li>Pile ID: @Model.PileId</li>
+        <li>Availability: @Model.Availability</li>
+      </ul>
+      <br>
 <a href="/Piles/Edit/@(Model.PileId)">
   <p>Edit</p>
 </a>
-
 <a href="/Piles">
   <p>Return</p>
 </a>
-
 <a href="/Piles/Delete/@(Model.PileId)">
   <p>Delete Pile</p>
 </a>
+
+    </div>
+    <div class="col-md">
+
+      <div id="map">
+        <script>
+          // Initialize and add the map
+          function initMap()  {
+            // The location of Pile
+            const pile = { lat: @Model.Lat, lng: @Model.Lng };
+            // The map, centered at Pile location
+            const map = new google.maps.Map(document.getElementById("map"), {
+              zoom: 15,
+              center: pile,
+            });
+
+            const marker = new google.maps.Marker({
+              position: pile,
+              map,
+              title: "Hello",
+              animation:google.maps.Animation.Drop 
+            });
+          }
+        </script>
+
+        <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw-NRVYJN5qSsNTkATz59olsr0WR5IwVY&callback=initMap&v=weekly"
+          defer></script>
+        window.initMap = initMap;
+    </div>
+    <ul>
+        <p>@Model.Lat/@Model.Lng</p>
+    </ul>
+  </div>
+</div>
+
+
