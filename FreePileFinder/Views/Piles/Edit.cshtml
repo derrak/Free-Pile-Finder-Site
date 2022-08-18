@@ -1,0 +1,51 @@
+@* @using FreePileFinder.Models; *@
+@* @model List<FreePileFinder.Models.Pile>; *@
+@model FreePileFinder.Models.Pile;
+
+@{
+  ViewData["Title"] = "Details";
+}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <h1>Pile Info:</h1>
+
+      <ul>
+        <li>Title: @Model.Title</li>
+        <li>Description: @Model.Description</li>
+        <li>State: @Model.State</li>
+        <li>City: @Model.City</li>
+        <li>Zipcode: @Model.Zipcode</li>
+        <li>Lattitude: @Model.Lat</li>
+        <li>Longitude: @Model.Lng</li>
+        <li>Post Date: @Model.CreatedDate</li>
+        <li>Pile ID: @Model.PileId</li>
+        <li>Availability: @Model.Availability</li>
+      </ul>
+      <br>
+
+      <a href="/Piles"><p>Return</p></a>
+      <a href="/Piles/Delete/@(Model.PileId)"><p>Delete Pile</p></a>
+
+    </div>
+    <div class="col-md">
+      <h1>Edit Info:</h1>
+      <form action="/Piles/Details/@(Model.PileId)" method="put">
+        <label for="title">Title:</label>
+        <input id="title" name="title" type="text" value="@(Model.Title)">
+<br>
+        <label for="description">Description:</label>
+        <input id="description" name="description" type="text" value="@(Model.Description)">
+    <br>    
+        <label for="availability">Items no longer available or pile cannot be found:</label>
+        <input id="availability" name="availability" type="checkbox" @(Model.Availability ? "checked='checked'" : "")/>
+<br>
+        <button type="submit">Update info!</button>
+      </form>
+<br>
+      <a href="/Piles/Details/@(Model.PileId)"><p>Return to Details</p></a>
+
+
+    </div>
+  </div>
