@@ -20,5 +20,33 @@
         <li>Availability: @pile.Availability</li>
     </ul>
     <a href="/Piles/Details/@(pile.PileId)"><p>View Details</p></a>
+   
+    @* <div id="map">
+        <script>
+            // Initialize and add the map
+            function initMap() {
+            // The location of Uluru
+            const pile = { lat: @pile.Lat, lng: @pile.Lng };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: pile,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: pile,
+                map: map,
+            });
+            }
+</script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw-NRVYJN5qSsNTkATz59olsr0WR5IwVY&callback=initMap&v=weekly"
+      defer
+    ></script>
+window.initMap = initMap;
+        
+    </div> *@
+
 }
 </ol>
